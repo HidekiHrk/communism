@@ -1,23 +1,28 @@
 $(() => {
-    let ctx = document.getElementById("mainCanvas").getContext('2d');
+    let mc = document.getElementById("mainCanvas");
+    let ctx = mc.getContext('2d');
     let cimg = document.getElementById('cimg');
-    let cimg2 = document.getElementById('cimg2');
-
-    function draw(uri){
-        $(cimg2).attr('src', uri);
-        document.createElement('img')
+    let cimg2 = new Image;
+    let dbutton = document.getElementById('dbutton');
+    $(cimg2).on('load', () => {
+        ctx.globalAlpha = 1;
         ctx.drawImage(cimg2, 0,0, 300, 300);
-        ctx.globalAlpha = 0.3;
+        ctx.globalAlpha = 0.5;
         ctx.drawImage(cimg, 0,0, 300, 300);
+    });
+    function draw(uri){
+        cimg2.crossOrigin = "anonymous";
+        $(cimg2).attr('src', uri);
     }
     function clear(){
         ctx.clearRect(0,0, 300,300);
     }
     $('#tbutton').click(() => {
-        clear();    
+        clear();
         draw($('#urlinput').val());
-        //'https://catracalivre.com.br/wp-content/uploads/2019/08/bolsonaro-2-1.jpg'
-
+    })
+    $('#dbutton').click(() => {
+        dbutton.setAttribute('href', mc.toDataURL('image/png'));
     })
     $('#rbutton').click(clear);
 })

@@ -13,5 +13,11 @@ $(() => {
     function clear(){
         ctx.clearRect(0,0, 300,300);
     }
-    draw('https://catracalivre.com.br/wp-content/uploads/2019/08/bolsonaro-2-1.jpg');
+    $('#tbutton').click(() => {
+        clear();    
+        draw($('#urlinput').val());
+        //'https://catracalivre.com.br/wp-content/uploads/2019/08/bolsonaro-2-1.jpg'
+
+    })
+    $('#rbutton').click(clear);
 })
